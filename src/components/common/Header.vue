@@ -6,17 +6,21 @@
     >
       <v-container class="py-0 fill-height">
         <v-avatar
-          class="mr-10"
+          class="mr-10 avatar"
           color="grey darken-1"
           size="32"
-        ></v-avatar>
+          @click="toHome('/')"
+        >
+          <img src="../../../public/KqDbvj6j7z.png">
+        </v-avatar>
 
         <v-btn
-          v-for="link in links"
-          :key="link"
+          v-for="link in header_links"
+          :key="link.name"
           text
+          @click="pageMove(link.path)"
         >
-          {{ link }}
+          {{ link.name }}
         </v-btn>
 
         <v-spacer></v-spacer>
@@ -38,12 +42,25 @@
 <script>
   export default {
     data: () => ({
-      links: [
-        'Dashboard',
-        'Messages',
-        'Profile',
-        'Updates',
+      header_links: [
+        {name: "会社概要", path: "/company/"},
+        {name: "サービス", path: "/service/"},
+        {name: "問い合わせ", path: "/contact/"},
       ],
     }),
+    methods: {
+      toHome(path) {
+        this.$router.push(path)
+      },
+      pageMove(path) {
+        this.$router.push(path)
+      }
+    }
   }
 </script>
+
+<style scoped>
+.avatar:hover {
+  cursor: pointer;
+}
+</style>
