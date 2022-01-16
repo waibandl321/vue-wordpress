@@ -37,7 +37,7 @@ import axios from 'axios'
 export default {
     components: {
         Header,
-        Aside
+        Aside,
     },
     data: () => ({
         post_id: null,

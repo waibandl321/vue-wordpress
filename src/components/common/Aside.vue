@@ -31,7 +31,7 @@ export default {
     },
     methods: {
         getCategories() {
-            const url = "http://localhost:8888/wp-dev/wp-json/wp/v2/categories?per_page=100"
+            const url = "https://freelance321.com/wp-json/wp/v2/categories?per_page=100"
             axios.get(url)
             .then(response => {
                 this.categories = response.data

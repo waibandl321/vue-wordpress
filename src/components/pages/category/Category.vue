@@ -72,7 +72,6 @@ export default {
     data: () => ({
         category_data: [],
         posts: null,
-        loading: true
     }),
     created() {
         this.init()
@@ -98,11 +97,10 @@ export default {
         },
         // カテゴリーに紐づく記事一覧
         async getPost() {
-            const url = "http://localhost:8888/wp-dev/wp-json/wp/v2/posts?categories=" + this.category_data.id
+            const url = "https://freelance321.com/wp-json/wp/v2/posts?categories=" + this.category_data.id
             axios.get(url)
             .then(res => {
                 this.posts = res.data
-                this.loading = false
                 return res.data
             })
             .then(data => {
