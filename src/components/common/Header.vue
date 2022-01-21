@@ -45,6 +45,7 @@
       header_links: [
         {name: "会社概要", path: "/company/"},
         {name: "サービス", path: "/service/"},
+        {name: "ブログ", path: "/blog/"},
         {name: "問い合わせ", path: "/contact/"},
       ],
     }),

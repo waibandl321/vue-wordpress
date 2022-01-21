@@ -6,7 +6,7 @@
                     v-if="r.count > 0"
                     :key="r.id"
                     link
-                    @click="setCategoryId(r)"
+                    @click="setCategoryId(r.id)"
                 >
                     <v-list-item-content>
                     <v-list-item-title>
@@ -20,26 +20,23 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 
 export default {
-    data: () => ({
-        categories: [],
-    }), 
-    created() {
-        this.getCategories()
+    props: {
+        categories: {
+            type: Array
+        },
+        menuClick: {
+            type: Function,
+            required: true
+        }
     },
     methods: {
-        getCategories() {
-            const url = "https://freelance321.com/wp-json/wp/v2/categories?per_page=100"
-            axios.get(url)
-            .then(response => {
-                this.categories = response.data
-            })
-        },
-        setCategoryId(data) {
-            this.$store.commit('setCategoryData', data)
-            this.$router.push('/category/' + data.slug)
+        // Prop で渡した function を実行
+        setCategoryId(id) {
+            this.$router.push('/category/' + id)
+            this.menuClick(id)
         }
     }
 }

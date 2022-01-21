@@ -5,11 +5,13 @@ import router from './router'
 import store from './store'
 
 // mixin
-import metaMixin from "./mixins/meta";
+import metaMixin from "./mixins/common/meta";
+import api from "./mixins/api/api.js"
 
 Vue.config.productionTip = false
 
 Vue.mixin(metaMixin)
+Vue.mixin(api)
 
 new Vue({
   vuetify,
