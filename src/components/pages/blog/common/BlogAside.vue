@@ -35,7 +35,7 @@ export default {
     methods: {
         // Prop で渡した function を実行
         setCategoryId(id) {
-            this.$router.push('/category/' + id)
+            this.$router.push('/category/' + id, () => {})
             this.menuClick(id)
         }
     }

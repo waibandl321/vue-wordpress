@@ -1,50 +1,55 @@
 <template>
     <div>
-        <v-card
-            v-for="post in this.params.categories"
-            class="mb-2 pa-2"
-            outlined
-            :key="post.id"
-        >
-            <v-list-item two-line class="pa-0">
-                <v-list-item-content>
-                    <v-list-item-title>{{ post.title.rendered }}</v-list-item-title>
-                </v-list-item-content>
-            </v-list-item>
-            <v-card-actions class="px-0 pb-4">
-                <v-btn
-                    depressed
-                    color="primary"
-                    @click="setPost(post)"
-                >
-                    もっと見る
-                </v-btn>
-            </v-card-actions>
-        </v-card>
+        <template>
+            <v-data-table
+                loading="!this.params.categoryPosts"
+                :headers="this.params.headers"
+                :items="this.params.categoryPosts"
+                :items-per-page="12"
+                class="elevation-1"
+                @click:row="setPost"
+            >
+            </v-data-table>
+        </template>
     </div>
 </template>
 
 <script>
 export default {
     props: {
-      params: Object
+      params: Object,
     },
     
     data: () => ({
-        posts: null,
+        category_id: null,
     }),
 
-    mounted() {
-      // window.onload = ()=> {
-      //   this.getCategoryPost()
-      // }
+    created() {
+        this.category_id = this.$route.params['id']
     },
-    
+
+    mounted() {
+        // リロード対策
+        window.onload = () => {
+            this.loading = true
+            this.apiGetCategoryPosts("posts", null, this.category_id)
+            .then(response => {
+                this.params.categoryPosts = this.convertPostList(response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+        }
+    },
+
     methods: {
         setPost(data) {
             this.$router.push('/post/' + data.id)
-        }
+        },
     },
 }
-
 </script>
+
+<style scoped>
+
+</style>

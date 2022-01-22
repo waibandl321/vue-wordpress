@@ -7,11 +7,13 @@ import store from './store'
 // mixin
 import metaMixin from "./mixins/common/meta";
 import api from "./mixins/api/api.js"
+import utils from "./mixins/utils.js"
 
 Vue.config.productionTip = false
 
 Vue.mixin(metaMixin)
 Vue.mixin(api)
+Vue.mixin(utils)
 
 new Vue({
   vuetify,

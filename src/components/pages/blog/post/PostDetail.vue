@@ -38,6 +38,12 @@ export default {
 }
 </script>
 
+<style scoped>
+img {
+    width: auto;
+}
+</style>
+
 
 <style scoped>
 

@@ -13,7 +13,9 @@
           </v-col>
           <!-- main -->   
           <v-col cols="9">
-            <router-view :params="params"/>
+            <router-view
+              :params="params"
+            />
           </v-col>
         </v-row>
       </v-container>
@@ -26,7 +28,7 @@
 import Header from "@/components/common/Header"
 import BlogAside from "@/components/pages/blog/common/BlogAside"
 import Footer from "@/components/common/Footer"
-import axios from 'axios'
+
 
 export default {
   components: {
@@ -36,7 +38,18 @@ export default {
   },
   data: () => ({
     params: {
-      categories: [],
+      categoryPosts: [],
+      headers: [
+          {
+              text: 'ID',
+              align: 'start',
+              sortable: false,
+              value: 'id',
+          },
+          { text: '記事', value: 'name' },
+          { text: '投稿日', value: 'date' },
+      ],
+      allPosts: [],
     },
     categoryList: [],
   }),
@@ -44,13 +57,27 @@ export default {
   created() {
     this.getCategories()
     this.setPageMeta('ホーム')
+    this.getAllPosts()
   },
   
   methods: {
     menuClick(id) {
+        this.params.categoryPosts = []
         this.getCategoryPost(id)
-        return this.count = id
     },
+
+    // 全記事
+    getAllPosts() {
+      this.apiGetRelatedPost("posts", 100)
+        .then(response => {
+            this.params.allPosts = this.convertPostList(response.data)
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    },
+
+    // 全カテゴリー
     getCategories() {
       this.apiGetRelatedPost("categories", 20)
       .then(response => {
@@ -60,18 +87,16 @@ export default {
           console.log(error)
       })
     },
-    async getCategoryPost(id) {
-        const url = "https://freelance321.com/wp-json/wp/v2/posts?categories=" + id
-        axios.get(url)
-        .then(res => {
-            this.params.categories = res.data
-            return res.data
-        })
-        .then(data => {
-          if(data) {
-            this.setCategoryMeta(this.$route.params.slug)
-          }
-        })
+
+    // カテゴリー記事
+    getCategoryPost(id) {
+      this.apiGetCategoryPosts("posts", null, id)
+      .then(response => {
+          this.params.categoryPosts = this.convertPostList(response.data)
+      })
+      .catch(error => {
+          console.log(error)
+      })
     },
   }
 }

@@ -10,9 +10,7 @@ export default new Vuex.Store({
     category: [],
   },
   mutations: {
-    setCategoryData(state, category) {
-      state.category = category
-    },
+    
   },
   actions: {
     
