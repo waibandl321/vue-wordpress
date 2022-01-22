@@ -1,5 +1,9 @@
 # vue-dev
 
+## ホスティング先
+AWS Amplify
+https://main.d2fj1gnx0hh704.amplifyapp.com/
+
 ## Project setup
 ```
 npm install
