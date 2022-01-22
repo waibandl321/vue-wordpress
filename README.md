@@ -1,8 +1,12 @@
 # vue-dev
 
-## ホスティング先
-AWS Amplify
+## ホスティング環境
+
+### AWS Amplify
 https://main.d2fj1gnx0hh704.amplifyapp.com/
+
+### Amplify 設定参考
+https://qiita.com/is_ryo/items/f57c4b7dbeb7e12bdfb3
 
 ## Project setup
 ```
